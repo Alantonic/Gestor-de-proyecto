@@ -104,6 +104,8 @@
             this.label4.Size = new System.Drawing.Size(71, 27);
             this.label4.TabIndex = 4;
             this.label4.Text = "Tareas";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.DoubleClick += new System.EventHandler(this.label4_DoubleClick);
             // 
             // label5
             // 
@@ -124,6 +126,7 @@
             this.label6.Size = new System.Drawing.Size(92, 27);
             this.label6.TabIndex = 6;
             this.label6.Text = "Usuarios";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             this.label6.DoubleClick += new System.EventHandler(this.label6_DoubleClick);
             // 
             // groupBox1

@@ -61,10 +61,28 @@ namespace Proyecto.Forms
             form.ShowDialog();
         }
 
+      
+
         private void label2_DoubleClick(object sender, EventArgs e)
         {
             Proyectosview form = new Proyectosview();
             form.ShowDialog();
+        }
+
+        private void label4_DoubleClick(object sender, EventArgs e)
+        {
+            Tareas form = new Tareas();
+            form.ShowDialog();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }

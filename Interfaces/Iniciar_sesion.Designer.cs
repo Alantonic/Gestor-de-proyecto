@@ -34,7 +34,7 @@
             this.TC2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -90,25 +90,24 @@
             this.label4.Size = new System.Drawing.Size(170, 32);
             this.label4.TabIndex = 7;
             this.label4.Text = "Registrarse";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // button1
+            // btnIniciarSesion
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(337, 348);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 37);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Acceder";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnIniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarSesion.Location = new System.Drawing.Point(337, 348);
+            this.btnIniciarSesion.Name = "btnIniciarSesion";
+            this.btnIniciarSesion.Size = new System.Drawing.Size(124, 37);
+            this.btnIniciarSesion.TabIndex = 8;
+            this.btnIniciarSesion.Text = "Acceder";
+            this.btnIniciarSesion.UseVisualStyleBackColor = true;
+            this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
             // 
             // Iniciar_sesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnIniciarSesion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TC2);
@@ -130,6 +129,6 @@
         private System.Windows.Forms.TextBox TC2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIniciarSesion;
     }
 }
