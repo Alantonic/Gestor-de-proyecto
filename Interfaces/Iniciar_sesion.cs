@@ -20,6 +20,8 @@ namespace Proyecto.Interfaces
         public Iniciar_sesion()
         {
             InitializeComponent();
+            string connectionString = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=proyecto;Data Source=ALANTONIC\\SQLEXPRESS";
+            conexion = new SqlConnection(connectionString);
         }
     
 
@@ -39,7 +41,7 @@ namespace Proyecto.Interfaces
       
         private void Iniciar_sesion_Load(object sender, EventArgs e)
         {
-
+            
         }
 
             
@@ -91,6 +93,11 @@ namespace Proyecto.Interfaces
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void Iniciar_sesion_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

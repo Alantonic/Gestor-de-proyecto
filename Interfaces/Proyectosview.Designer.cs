@@ -42,7 +42,6 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(802, 249);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
@@ -63,6 +62,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Proyectosview";
             this.Text = "Proyectosview";
+            this.Load += new System.EventHandler(this.Proyectosview_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

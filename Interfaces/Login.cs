@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Proyecto.Base_Datos;
+
 using Proyecto.Forms;
 using Proyecto.Interfaces;
 
@@ -70,6 +70,11 @@ namespace Proyecto
                     TC1.Clear();
                 }
             }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
+    }
     }
 

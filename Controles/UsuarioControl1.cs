@@ -7,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Proyecto.Base_Datos;
 using Proyecto.Clases;
 using Proyecto.Forms;
-
+using Proyecto.Modelos;
 using Proyecto.Repositorio;
 
 namespace Proyecto.Controles
 {
     public partial class UserControl1 : UserControl
     {
-        private usuario _usuarioActual;
+        private UsuariosModel _usuarioActual;
 
         public UserControl1()
         {
@@ -25,7 +24,7 @@ namespace Proyecto.Controles
             // Para nuevo usuario
         }
 
-        public UserControl1(usuario usuario)  // ← CONSTRUCTOR PARA EDITAR
+        public UserControl1(UsuariosModel usuario)  // ← CONSTRUCTOR PARA EDITAR
         {
             InitializeComponent();
             _usuarioActual = usuario;
@@ -46,6 +45,21 @@ namespace Proyecto.Controles
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

@@ -21,21 +21,7 @@ namespace Proyecto.Interfaces
 
         private void Equipo_Load(object sender, EventArgs e)
         {
-            List<Equipo> equipos = null;
-            try
-            {
-                equipos = Equipo.Representar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error en Presentar(): " + ex.ToString());
-                return;
-            }
-            if (dataGridView1 == null)
-            {
-                MessageBox.Show("Error: dataGridView1 es null");
-                return;
-            }
+      
 
             // Asigna al DataGridView
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
@@ -60,7 +46,7 @@ namespace Proyecto.Interfaces
 
 
             dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = equipos;
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -5,15 +5,17 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Proyecto.Base_Datos;
 using Proyecto.Clases;
 using Proyecto.Controles;
 using Proyecto.Interfaces;
 using Proyecto.Modelos;
-using static Proyecto.Clases.Presentar;
+using Proyecto.Repositorio;
+using static Proyecto.Modelos.ProyectosModel;
+
 
 namespace Proyecto.Forms
 {
@@ -26,6 +28,7 @@ namespace Proyecto.Forms
             InitializeComponent();
             IniatializateUsuarioDataGridView();
             InitializeContextMenu();
+            Usuario_Settings();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -39,31 +42,24 @@ namespace Proyecto.Forms
 
         }
 
-     
+
 
         private void IniatializateUsuarioDataGridView()
         {
-           try
+            try
             {
-                var view = new UsuarioRepository();
-                dataGridView1.DataSource = view.GetAll("")
-                .Select(u => new
-                 {
-                     ID = u.ID,
-                     Nombre = u.Nombre,
-                     Telefono = u.Telefono,
-                     Gmail = u.Gmail                     
-                 })
-                 .ToList();
-        }
+                var repositorio = new UsuarioRepository();
+                dataGridView1.DataSource = repositorio.GetAll();
+
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Hubo un error en los datos: " + ex.ToString());
             }
         }
 
-   
-     
+
+
 
         private void EditUsuarioButton_Click(object sender, EventArgs e)
         {
@@ -79,30 +75,37 @@ namespace Proyecto.Forms
 
             // Obtiene el producto seleccionado usando el valor de la celda "code"
 
-           int ID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            int ID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
 
-          var repo = new UsuarioRepository();
+            var repo = new UsuarioRepository();
             var selecteduser = repo.Find(ID);
 
             if (selecteduser == null) return;
-           
+
+
+
+
+
             // Abre el usercontrol1
             Form form = new Form();
-                form.Text = "Editar Usuario";
-           AutoSize = true;
+            form.Text = "Editar Usuario";
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
-            UserControl1 userControl = new UserControl1();
-                userControl.Dock = DockStyle.Fill;
-                form.Controls.Add(userControl);
-                form.ShowDialog();
+            UserControl1 userControl = new UserControl1(selecteduser);
+            userControl.Dock = DockStyle.Fill;
+            form.Controls.Add(userControl);
+            form.ShowDialog();
 
             IniatializateUsuarioDataGridView(); // Actualiza la vista después de editar
 
 
 
         }
+
+
+
 
         private void deleteUsuarioButton_Click(object sender, EventArgs e)
         {
@@ -135,8 +138,8 @@ namespace Proyecto.Forms
                 );
             if (result == DialogResult.Yes)
             {
-               // bool eliminado = repo.Delete(ID);
-               bool eliminado = repo.Delete(ID);
+                // bool eliminado = repo.Delete(ID);
+                bool eliminado = repo.Delete(ID);
                 if (eliminado)
                 {
                     MessageBox.Show("Usuario eliminado exitosamente.");
@@ -152,9 +155,15 @@ namespace Proyecto.Forms
         private void InitializeContextMenu()
         {
             ContextMenuStrip contextMenu = new ContextMenuStrip();
+
             ToolStripMenuItem editItem = new ToolStripMenuItem("Editar");
             editItem.Click += EditUsuarioButton_Click;
             contextMenu.Items.Add(editItem);
+
+            ToolStripMenuItem deleteItem = new ToolStripMenuItem("Eliminar");
+            deleteItem.Click += deleteUsuarioButton_Click;
+            contextMenu.Items.Add(deleteItem);
+
             dataGridView1.ContextMenuStrip = contextMenu;
         }
 
@@ -162,60 +171,12 @@ namespace Proyecto.Forms
 
 
 
-        //Hace consultas
-        internal static List<UsuariosModel> Representar()
+
+
+        private void Usuario_Settings() // Configura las columnas del DataGridView
         {
-            List<UsuariosModel> lista = new List<UsuariosModel>();
-
-            using (SqlConnection conexion = Conectar())
-            {
-                string query = "SELECT * FROM usuario";
-                SqlCommand comando = new SqlCommand(query, conexion);
-                using (SqlDataReader reader = comando.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        UsuariosModel prod = new UsuariosModel
-                        {
-                            ID = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            Telefono = reader.GetString(2),
-                            Gmail = reader.GetString(3)
-                        };
-                        lista.Add(prod);
-                    }
-
-
-                }
-            }
-            return lista;
-
-
-        }
-
-
-        private static SqlConnection Conectar()
-        {
-            return Proyecto.Clases.BD.ObtenerConexion();
-        }
-
-        private void Usuario_Load(object sender, EventArgs e)
-        {
-            List<UsuariosModel> usuarios = null;
-            try
-            {
-                usuarios = Representar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error en Presentar(): " + ex.ToString());
-                return;
-            }
-            if (dataGridView1 == null)
-            {
-                MessageBox.Show("Error: dataGridView1 es null");
-                return;
-            }
+            dataGridView1.AutoGenerateColumns = true; // Desactiva la generación automática de columnas
+            dataGridView1.Columns.Clear();
 
             // Asigna al DataGridView
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
@@ -239,30 +200,9 @@ namespace Proyecto.Forms
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 DataPropertyName = "Gmail",
-                HeaderText = "ID",
+                HeaderText = "Gmail",
                 Width = 100
             });
-
-
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.DataSource = usuarios;
         }
-
-
-
-      
-    }
-
-    internal class EditUsuarioForm
-    {
-        public EditUsuarioForm(usuario selecteduser)
-        {
-            Selecteduser = selecteduser;
-        }
-
-        public usuario Selecteduser { get; }
-
-
     }
 }
-

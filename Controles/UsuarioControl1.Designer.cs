@@ -69,6 +69,7 @@
             this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "Telefono:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 
@@ -80,6 +81,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Agregar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtNombre
             // 
@@ -146,6 +148,7 @@
             this.Controls.Add(this.label1);
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(400, 250);
+            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

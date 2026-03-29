@@ -76,7 +76,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Usuarioview";
             this.Text = "Usuario";
-            this.Load += new System.EventHandler(this.Usuario_Load);
+         //   this.Load += new System.EventHandler(this.Usuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -46,6 +46,10 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Configuration.ConfigurationManager.10.0.5\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
@@ -62,45 +66,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base_Datos\BD.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BD.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\BD.cs" />
-    <Compile Include="Base_Datos\BD.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BD.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\BD1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\Documento.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\equipo.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\equipo_usuario.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\Proyecto.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\Tarea.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base_Datos\usuario.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Controles\UserControl1.cs">
+    <Compile Include="Conexion_Base_Datos\BD.cs" />
+    <Compile Include="Controles\UsuarioControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controles\UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <Compile Include="Controles\UsuarioControl1.Designer.cs">
+      <DependentUpon>UsuarioControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ProyectoControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ProyectoControl2.Designer.cs">
+      <DependentUpon>ProyectoControl2.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\Equipoview.cs">
       <SubType>Form</SubType>
@@ -126,11 +103,11 @@
     <Compile Include="Interfaces\Tareas.Designer.cs">
       <DependentUpon>Tareas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\EquipoModel.cs" />
+    <Compile Include="Modelos\ProyectosModel.cs" />
     <Compile Include="Modelos\UsuariosModel.cs" />
-    <Compile Include="Repositorio\Equipo.cs" />
-    <Compile Include="Repositorio\Equipoview.cs" />
-    <Compile Include="Repositorio\Proyectos.cs" />
-    <Compile Include="Repositorio\Proyectosview.cs" />
+    <Compile Include="Repositorio\EquipoRepository.cs" />
+    <Compile Include="Repositorio\ProyectosRepository.cs" />
     <Compile Include="Repositorio\UsuarioRepository.cs" />
     <Compile Include="Interfaces\Login.cs">
       <SubType>Form</SubType>
@@ -155,18 +132,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Base_Datos\BD.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BD.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Base_Datos\BD.edmx.diagram">
-      <DependentUpon>BD.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controles\UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <EmbeddedResource Include="Controles\UsuarioControl1.resx">
+      <DependentUpon>UsuarioControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ProyectoControl2.resx">
+      <DependentUpon>ProyectoControl2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\Equipoview.resx">
       <DependentUpon>Equipoview.cs</DependentUpon>
@@ -189,18 +162,6 @@
     <EmbeddedResource Include="Interfaces\Usuarioview.resx">
       <DependentUpon>Usuarioview.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Base_Datos\BD.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BD.edmx</DependentUpon>
-      <LastGenOutput>BD.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Base_Datos\BD.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BD.edmx</DependentUpon>
-      <LastGenOutput>BD1.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

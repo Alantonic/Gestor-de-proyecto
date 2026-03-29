@@ -89,6 +89,7 @@
             // TC1
             // 
             this.TC1.Location = new System.Drawing.Point(363, 241);
+            this.TC1.Multiline = true;
             this.TC1.Name = "TC1";
             this.TC1.Size = new System.Drawing.Size(100, 22);
             this.TC1.TabIndex = 4;
@@ -129,6 +130,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Login";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -141,10 +143,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TU1;
         private System.Windows.Forms.TextBox TC1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

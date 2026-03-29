@@ -1,242 +1,230 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Proyecto.Base_Datos;
-using Proyecto.Clases;
-using Proyecto.Forms;
 using Proyecto.Modelos;
-
+using Proyecto.Conexion_Base_Datos;
 namespace Proyecto.Clases
 {
-
-
-    public class Presentar
+    public class UsuarioRepository
     {
-        private static SqlConnection ObtenerConexion()
+        // GET ALL con búsqueda (ADO.NET)
+        public List<UsuariosModel> GetAll(string searchTerm = "")
         {
-            return BD.ObtenerConexion();
-        }
-        public static int AgregarProducto(UsuariosModel usuario)
-        {
-            int r = 0;
-            using (SqlConnection conexion = ObtenerConexion())
+            List<UsuariosModel> usuarios = new List<UsuariosModel>();
+
+            try
             {
-
-                string consulta = "INSERT INTO Usuario (ID, Nombre, Telefono, Gmail) " +
-                    "VALUES (@ID, @Nombre, @Telefono, @Gmail)";
-                SqlCommand comando = new SqlCommand(consulta, conexion);
-
-                //Parametros para evitar inyecciones SQL
-
-                comando.Parameters.AddWithValue("@ID", usuario.ID);
-                comando.Parameters.AddWithValue("@Nombre", usuario.Nombre);
-                comando.Parameters.AddWithValue("@Telefono", usuario.Telefono);
-                comando.Parameters.AddWithValue("@Gmail", usuario.Gmail);
-
-
-
-
-                r = comando.ExecuteNonQuery();
-
-            }
-            return r;
-        }
-
-
-        public class UsuarioRepository
-        {
-            // GET ALL con búsqueda
-            public List<usuario> GetAll(string searchTerm = "")
-            {
-                List<usuario> usuarios = new List<usuario>();
-
-                try
+                using (SqlConnection conexion = BD.ObtenerConexion())
                 {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        usuarios = db.usuario
-                            .Where(u =>
-                                u.Nombre.Contains(searchTerm) ||
-                                u.Gmail.Contains(searchTerm) ||
-                                u.Telefono.Contains(searchTerm) ||
-                                u.ID.ToString().Contains(searchTerm)
-                            )
-                            .ToList();
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    usuarios = new List<usuario>();
-                }
+                    string consulta = @"SELECT ID, Nombre, Telefono, Gmail 
+                                       FROM Usuario 
+                                       WHERE (@searchTerm = '' 
+                                          OR Nombre LIKE @searchTermLike 
+                                          OR Gmail LIKE @searchTermLike 
+                                          OR Telefono LIKE @searchTermLike
+                                          OR CAST(ID AS VARCHAR) LIKE @searchTermLike)";
 
-                return usuarios;
-            }
-
-            //Find por ID
-
-            public usuario Find(int ID)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        return db.usuario.FirstOrDefault(u => u.ID == ID);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return null;
-                }
-
-            }
-
-           
-
-
-            //Find por Gmail
-
-            public usuario Find(string Gmail)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        return db.usuario.FirstOrDefault(u => u.Gmail == Gmail);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return null;
-                }
-            }
-
-            //Find por Telefono
-
-            public usuario FindTelefono(string Telefono)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        return db.usuario.FirstOrDefault(u => u.Telefono == Telefono);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return null;
-                }
-            }
-
-            //Find por Nombre
-
-            public bool Insert(usuario user)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        db.usuario.Add(user);
-                        db.SaveChanges();
-                        return true;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
-            }
-
-            //Update por ID
-
-            public bool Update(usuario user)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        var existingUser = db.usuario.FirstOrDefault(u => u.ID == user.ID);
-                        if (existingUser != null)
-                        {
-                            existingUser.Nombre = user.Nombre;
-                            existingUser.Telefono = user.Telefono;
-                            existingUser.Gmail = user.Gmail;
-                            db.SaveChanges();
-                            return true;
-                        }
-                        return false;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
-            }
-            
-
-            public bool Delete(int ID)
-            {
-                try
-                {
-                    using (Proyecto.Base_Datos.BD db = new Proyecto.Base_Datos.BD())
-                    {
-                        var user = db.usuario.Find(ID);
-                        if (user != null)
-                        {
-                            db.usuario.Remove(user);
-                            db.SaveChanges();
-                            return true;
-                        }
-                        return false;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
-            }
-         
-
-
-            public static List<UsuariosModel> Representar()
-            {
-                List<UsuariosModel> lista = new List<UsuariosModel>();
-                using (SqlConnection conexion = ObtenerConexion())
-                {
-                    string consulta = "SELECT ID, Nombre, Telefono, Gmail FROM Usuario";
                     SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@searchTerm", searchTerm);
+                    comando.Parameters.AddWithValue("@searchTermLike", "%" + searchTerm + "%");
 
                     using (SqlDataReader reader = comando.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            UsuariosModel prod = new UsuariosModel();
-                            prod.ID = reader.GetInt32(0);
-                            prod.Nombre = reader.GetString(1);
-                            prod.Telefono = reader.GetString(2);
-                            prod.Gmail = reader.GetString(3);
-
-                            lista.Add(prod);
+                            usuarios.Add(new UsuariosModel
+                            {
+                                ID = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Telefono = reader.GetString(2),
+                                Gmail = reader.GetString(3)
+                            });
                         }
-
                     }
                 }
-                return lista;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
+            return usuarios;
+        }
+
+        
+        // FIND por ID (ADO.NET)
+  
+        public UsuariosModel Find(int ID)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "SELECT ID, Nombre, Telefono, Gmail FROM Usuario WHERE ID = @ID";
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@ID", ID);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UsuariosModel
+                            {
+                                ID = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Telefono = reader.GetString(2),
+                                Gmail = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
+        }
+
+        // FIND por Gmail (ADO.NET)
+        public UsuariosModel Find(string Gmail)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "SELECT ID, Nombre, Telefono, Gmail FROM Usuario WHERE Gmail = @Gmail";
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@Gmail", Gmail);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UsuariosModel
+                            {
+                                ID = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Telefono = reader.GetString(2),
+                                Gmail = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
+        }
+
+        // FIND por Telefono (ADO.NET)
+        public UsuariosModel FindTelefono(string Telefono)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "SELECT ID, Nombre, Telefono, Gmail FROM Usuario WHERE Telefono = @Telefono";
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@Telefono", Telefono);
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UsuariosModel
+                            {
+                                ID = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Telefono = reader.GetString(2),
+                                Gmail = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
+        }
+
+        //Insertar nuevo usuario (ADO.NET)
+        public bool Insert(UsuariosModel user)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = @"INSERT INTO Usuario (Nombre, Telefono, Gmail) 
+                                       VALUES (@Nombre, @Telefono, @Gmail)";
+
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@Nombre", user.Nombre);
+                    comando.Parameters.AddWithValue("@Telefono", user.Telefono);
+                    comando.Parameters.AddWithValue("@Gmail", user.Gmail);
+
+                    return comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        // Actualizar usuario existente (ADO.NET)
+        public bool Update(UsuariosModel user)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = @"UPDATE Usuario 
+                                       SET Nombre = @Nombre, 
+                                           Telefono = @Telefono, 
+                                           Gmail = @Gmail 
+                                       WHERE ID = @ID";
+
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@ID", user.ID);
+                    comando.Parameters.AddWithValue("@Nombre", user.Nombre);
+                    comando.Parameters.AddWithValue("@Telefono", user.Telefono);
+                    comando.Parameters.AddWithValue("@Gmail", user.Gmail);
+
+                    return comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        // Eliminar usuario por ID (ADO.NET)
+        public bool Delete(int ID)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "DELETE FROM Usuario WHERE ID = @ID";
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@ID", ID);
+
+                    return comando.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
     }
 }
+
