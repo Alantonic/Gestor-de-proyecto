@@ -6,75 +6,99 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using Proyecto.Forms;
-using Proyecto.Interfaces;
 
-namespace Proyecto
+namespace Proyecto.Interfaces
 {
-    public partial class Login : Form
+    public partial class Iniciar_sesion : Form
     {
-        public Login()
+        private SqlConnection conexion;
+        public Iniciar_sesion()
         {
             InitializeComponent();
+            string connectionString = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=proyecto;Data Source=ALANTONIC\\SQLEXPRESS";
+            conexion = new SqlConnection(connectionString);
+        }
+    
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            conexion.Open();
-            string Nombre = TU1.Text;
-            string Contraseña = TC1.Text;
-
-            SqlCommand command = new SqlCommand(
-           "INSERT INTO usuarios_login (usuario_sesion, contraseña) VALUES (@usuario_sesion, @contraseña)",
-           conexion
-       );
-
-            command.Parameters.AddWithValue("@usuario_sesion", Nombre);  // 
-            command.Parameters.AddWithValue("@contraseña", Contraseña);
-
-            int ejecutar = command.ExecuteNonQuery();
-            conexion.Close();
-           
-
             Main form = new Main();
             form.ShowDialog();
+
         }
 
-       SqlConnection conexion = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=proyecto;Data Source=ALANTONIC\\SQLEXPRESS");
+      
+        private void Iniciar_sesion_Load(object sender, EventArgs e)
+        {
+            
+        }
 
+            
 
-
-
-
-
-
-
-        private void label4_Click(object sender, EventArgs e)
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        {
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrWhiteSpace(TU2.Text) || string.IsNullOrWhiteSpace(TC2.Text))
             {
-                try
-                {
-                    TextWriter Registro = new StreamWriter(@"C:\Users\alanv\source\repos\Proyecto\Proyecto\bin\Debug\" + TU1.Text + ".txt", true);
-                    Registro.WriteLine(TC1.Text);
-                    Iniciar_sesion form = new Iniciar_sesion();
-                    form.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al escribir en el archivo: " + ex.ToString());
-                    TU1.Clear();
-                    TC1.Clear();
-                }
+                MessageBox.Show("Ingrese usuario y contraseña");
+                return;
             }
 
-        private void Login_Load(object sender, EventArgs e)
+            try
+            {
+                conexion.Open();
+
+                string usuario = TU2.Text;
+                string contraseña = TC2.Text;
+
+                // Consulta para verificar si existe el usuario
+                SqlCommand command = new SqlCommand(
+         "SELECT COUNT(*) FROM usuarios_login WHERE usuario_sesion = @usuario_sesion AND contraseña = @contraseña",
+         conexion
+     );
+
+                command.Parameters.AddWithValue("@usuario_sesion", usuario);
+                command.Parameters.AddWithValue("@contraseña", contraseña);
+
+                int count = (int)command.ExecuteScalar();  // Devuelve el número de coincidencias
+
+                conexion.Close();
+
+                if (count > 0)
+                {
+                    MessageBox.Show("Inicio de sesión exitoso");
+
+                    // Abre el formulario principal
+                    Main mainForm = new Main();
+                    mainForm.Show();
+                    this.Hide();  // Oculta el formulario de login
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o contraseña incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void Iniciar_sesion_Load_1(object sender, EventArgs e)
         {
 
         }
     }
-    }
+}
 

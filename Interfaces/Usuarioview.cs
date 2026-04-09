@@ -1,21 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Proyecto.Clases;
 using Proyecto.Controles;
-using Proyecto.Interfaces;
-using Proyecto.Modelos;
-using Proyecto.Repositorio;
-using static Proyecto.Modelos.ProyectosModel;
-
 
 namespace Proyecto.Forms
 {
@@ -26,132 +12,211 @@ namespace Proyecto.Forms
         public Usuarioview()
         {
             InitializeComponent();
-            IniatializateUsuarioDataGridView();
+
+            // Configurar TODO antes de cargar datos
+            ConfigureDataGridView();
             InitializeContextMenu();
-            Usuario_Settings();
+            LoadUserData();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        // Configuración completa del DataGridView
+        private void ConfigureDataGridView()
         {
-            Main form = new Main();
-            form.ShowDialog();
+            // Limpiar cualquier configuración previa
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Columns.Clear();
+
+            // Agregar columnas MANUALMENTE con nombres exactos
+            DataGridViewTextBoxColumn colID = new DataGridViewTextBoxColumn();
+            colID.Name = "ID";                    // ← Nombre interno de la columna
+            colID.DataPropertyName = "ID";        // ← Propiedad del modelo
+            colID.HeaderText = "ID";
+            colID.Width = 80;
+            colID.ReadOnly = true;
+            dataGridView1.Columns.Add(colID);
+
+            DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
+            colNombre.Name = "Nombre";
+            colNombre.DataPropertyName = "Nombre";
+            colNombre.HeaderText = "Nombre";
+            colNombre.Width = 150;
+            dataGridView1.Columns.Add(colNombre);
+
+            DataGridViewTextBoxColumn colTelefono = new DataGridViewTextBoxColumn();
+            colTelefono.Name = "Telefono";
+            colTelefono.DataPropertyName = "Telefono";
+            colTelefono.HeaderText = "Teléfono";
+            colTelefono.Width = 120;
+            dataGridView1.Columns.Add(colTelefono);
+
+            DataGridViewTextBoxColumn colGmail = new DataGridViewTextBoxColumn();
+            colGmail.Name = "Gmail";
+            colGmail.DataPropertyName = "Gmail";
+            colGmail.HeaderText = "Gmail";
+            colGmail.Width = 200;
+            dataGridView1.Columns.Add(colGmail);
+
+            // Configuración visual
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;
+
+            // Verificar que las columnas se crearon
+            Console.WriteLine($"Número de columnas: {dataGridView1.Columns.Count}");
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                Console.WriteLine($"Columna: {col.Name} - DataPropertyName: {col.DataPropertyName}");
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-
-        private void IniatializateUsuarioDataGridView()
+        // Cargar datos
+        private void LoadUserData()
         {
             try
             {
                 var repositorio = new UsuarioRepository();
-                dataGridView1.DataSource = repositorio.GetAll();
+                var usuarios = repositorio.GetAll();
 
+                if (usuarios == null || usuarios.Count == 0)
+                {
+                    dataGridView1.DataSource = null;
+                    MessageBox.Show("No hay usuarios para mostrar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                dataGridView1.DataSource = usuarios;
+
+               
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hubo un error en los datos: " + ex.ToString());
+                MessageBox.Show("Error al cargar datos: " + ex.Message);
             }
         }
 
-
-
-
+        // 2. Editar usuario (menú contextual) - CORREGIDO
         private void EditUsuarioButton_Click(object sender, EventArgs e)
         {
+            // Verificar que hay filas
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay usuarios para editar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Verifica que haya una celda seleccionada
-            var selectedCell = dataGridView1.SelectedCells[0];
-            if (selectedCell == null) return;
+            // Verificar que hay una fila seleccionada
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario para editar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Obtiene la fila seleccionada
+            // Obtener la fila seleccionada
+            var selectedRow = dataGridView1.SelectedRows[0];
+            if (selectedRow == null || selectedRow.IsNewRow) return;
 
-            var selectedRow = dataGridView1.Rows[selectedCell.RowIndex];
-            if (selectedRow == null) return;
+            // Verificar que la columna existe
+            if (!dataGridView1.Columns.Contains("ID"))
+            {
+                MessageBox.Show("Error: La columna ID no existe en el DataGridView.", "Error crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            // Obtiene el producto seleccionado usando el valor de la celda "code"
-
-            int ID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            // Obtener el ID usando el índice de la columna (más seguro)
+            int idColumnIndex = dataGridView1.Columns["ID"].Index;
+            int ID = Convert.ToInt32(selectedRow.Cells[idColumnIndex].Value);
 
             var repo = new UsuarioRepository();
             var selecteduser = repo.Find(ID);
 
-            if (selecteduser == null) return;
+            if (selecteduser == null)
+            {
+                MessageBox.Show("No se encontró el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-
-
-
-
-            // Abre el usercontrol1
+            // Abrir formulario de edición
             Form form = new Form();
             form.Text = "Editar Usuario";
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            form.MaximizeBox = false;
+            form.MinimizeBox = false;
+
             UserControl1 userControl = new UserControl1(selecteduser);
+            form.ClientSize = userControl.Size;
+            form.MinimumSize = userControl.Size;
+            form.MaximumSize = userControl.Size;
             userControl.Dock = DockStyle.Fill;
             form.Controls.Add(userControl);
             form.ShowDialog();
+            Close();
 
-            IniatializateUsuarioDataGridView(); // Actualiza la vista después de editar
-
-
-
+            // Recargar datos después de editar
+            LoadUserData();
         }
 
-
-
-
+        // 3. Eliminar usuario (menú contextual) - CORREGIDO
         private void deleteUsuarioButton_Click(object sender, EventArgs e)
         {
-            var selectedCell = dataGridView1.SelectedCells[0];
-            if (selectedCell == null) return;
+            // Verificar que hay filas
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay usuarios para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Obtiene la fila seleccionada
+            // Verificar que hay una fila seleccionada
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            var selectedRow = dataGridView1.Rows[selectedCell.RowIndex];
-            if (selectedRow == null) return;
+            // Obtener la fila seleccionada
+            var selectedRow = dataGridView1.SelectedRows[0];
+            if (selectedRow == null || selectedRow.IsNewRow) return;
 
-            // Obtiene el producto seleccionado usando el valor de la celda "code"
+            // Verificar que la columna existe
+            if (!dataGridView1.Columns.Contains("ID"))
+            {
+                MessageBox.Show("Error: La columna ID no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            int ID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            // Obtener el ID
+            int idColumnIndex = dataGridView1.Columns["ID"].Index;
+            int ID = Convert.ToInt32(selectedRow.Cells[idColumnIndex].Value);
 
+            // Confirmar eliminación
+            DialogResult result = MessageBox.Show(
+                "¿Estás seguro de que deseas eliminar este usuario?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
 
-            //busca usuario por ID
-            var repo = new UsuarioRepository();
-            var selecteduser = repo.Find(ID);
-
-            if (selecteduser == null) return;
-
-            // Abre el formulario de edición con el producto seleccionado
-            DialogResult result = MessageBox.Show
-                (
-                    "¿Estás seguro de que deseas eliminar este usuario?",
-                    "Confirmar eliminación",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
             if (result == DialogResult.Yes)
             {
-                // bool eliminado = repo.Delete(ID);
+                var repo = new UsuarioRepository();
                 bool eliminado = repo.Delete(ID);
+
                 if (eliminado)
                 {
-                    MessageBox.Show("Usuario eliminado exitosamente.");
-                    IniatializateUsuarioDataGridView(); // Actualiza la vista después de eliminar
+                    MessageBox.Show("Usuario eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadUserData(); // Recargar datos
                 }
                 else
                 {
-                    MessageBox.Show("Error al eliminar el usuario.");
+                    MessageBox.Show("Error al eliminar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
+        // 4. Configurar menú contextual
         private void InitializeContextMenu()
         {
             ContextMenuStrip contextMenu = new ContextMenuStrip();
@@ -167,42 +232,15 @@ namespace Proyecto.Forms
             dataGridView1.ContextMenuStrip = contextMenu;
         }
 
-
-
-
-
-
-
-        private void Usuario_Settings() // Configura las columnas del DataGridView
+        private void Usuarioview_Load(object sender, EventArgs e)
         {
-            dataGridView1.AutoGenerateColumns = true; // Desactiva la generación automática de columnas
-            dataGridView1.Columns.Clear();
+            // Cualquier lógica adicional
+        }
 
-            // Asigna al DataGridView
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "ID",
-                HeaderText = "ID",
-                Width = 100
-            });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "Nombre",
-                HeaderText = "Nombre",
-                Width = 100
-            });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "Telefono",
-                HeaderText = "Telefono",
-                Width = 100
-            });
-            dataGridView1.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                DataPropertyName = "Gmail",
-                HeaderText = "Gmail",
-                Width = 100
-            });
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Main form = new Main();
+            form.ShowDialog();
         }
     }
 }

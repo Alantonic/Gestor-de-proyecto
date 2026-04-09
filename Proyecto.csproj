@@ -67,6 +67,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion_Base_Datos\BD.cs" />
+    <Compile Include="Controles\ClientesControl3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ClientesControl3.Designer.cs">
+      <DependentUpon>ClientesControl3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DocumentosControl3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\DocumentosControl3.Designer.cs">
+      <DependentUpon>DocumentosControl3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\UserControlTarea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\UserControlTarea.Designer.cs">
+      <DependentUpon>UserControlTarea.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controles\UsuarioControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,17 +97,23 @@
     <Compile Include="Controles\ProyectoControl2.Designer.cs">
       <DependentUpon>ProyectoControl2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\Equipoview.cs">
+    <Compile Include="Interfaces\Clientesview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaces\Equipoview.Designer.cs">
-      <DependentUpon>Equipoview.cs</DependentUpon>
+    <Compile Include="Interfaces\Clientesview.Designer.cs">
+      <DependentUpon>Clientesview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\Iniciar_sesion.cs">
+    <Compile Include="Interfaces\DocumentoView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaces\Iniciar_sesion.Designer.cs">
-      <DependentUpon>Iniciar_sesion.cs</DependentUpon>
+    <Compile Include="Interfaces\DocumentoView.Designer.cs">
+      <DependentUpon>DocumentoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\Proyectosview.cs">
       <SubType>Form</SubType>
@@ -103,17 +127,29 @@
     <Compile Include="Interfaces\Tareas.Designer.cs">
       <DependentUpon>Tareas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\EquipoModel.cs" />
-    <Compile Include="Modelos\ProyectosModel.cs" />
-    <Compile Include="Modelos\UsuariosModel.cs" />
-    <Compile Include="Repositorio\EquipoRepository.cs" />
-    <Compile Include="Repositorio\ProyectosRepository.cs" />
-    <Compile Include="Repositorio\UsuarioRepository.cs" />
-    <Compile Include="Interfaces\Login.cs">
+    <Compile Include="Interfaces\TareasView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaces\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Interfaces\TareasView.Designer.cs">
+      <DependentUpon>TareasView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelos\ClientesModel.cs" />
+    <Compile Include="Modelos\DocumentoModel.cs" />
+    <Compile Include="Modelos\EquipoModel.cs" />
+    <Compile Include="Modelos\ProyectosModel.cs" />
+    <Compile Include="Modelos\TareasModel.cs" />
+    <Compile Include="Modelos\UsuariosModel.cs" />
+    <Compile Include="Repositorio\ClientesRepository.cs" />
+    <Compile Include="Repositorio\DocumentoRepository.cs" />
+    <Compile Include="Repositorio\EquipoRepository.cs" />
+    <Compile Include="Repositorio\ProyectosRepository.cs" />
+    <Compile Include="Repositorio\TareaRepository.cs" />
+    <Compile Include="Repositorio\UsuarioRepository.cs" />
+    <Compile Include="Interfaces\Check-in.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\Check-in.Designer.cs">
+      <DependentUpon>Check-in.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\Main.cs">
       <SubType>Form</SubType>
@@ -135,20 +171,32 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\ClientesControl3.resx">
+      <DependentUpon>ClientesControl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\DocumentosControl3.resx">
+      <DependentUpon>DocumentosControl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\UserControlTarea.resx">
+      <DependentUpon>UserControlTarea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\UsuarioControl1.resx">
       <DependentUpon>UsuarioControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\ProyectoControl2.resx">
       <DependentUpon>ProyectoControl2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\Equipoview.resx">
-      <DependentUpon>Equipoview.cs</DependentUpon>
+    <EmbeddedResource Include="Interfaces\Clientesview.resx">
+      <DependentUpon>Clientesview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\Iniciar_sesion.resx">
-      <DependentUpon>Iniciar_sesion.cs</DependentUpon>
+    <EmbeddedResource Include="Interfaces\DocumentoView.resx">
+      <DependentUpon>DocumentoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\Check-in.resx">
+      <DependentUpon>Check-in.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -158,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\Tareas.resx">
       <DependentUpon>Tareas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\TareasView.resx">
+      <DependentUpon>TareasView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaces\Usuarioview.resx">
       <DependentUpon>Usuarioview.cs</DependentUpon>

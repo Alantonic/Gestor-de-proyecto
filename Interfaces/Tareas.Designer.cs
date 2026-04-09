@@ -1,6 +1,6 @@
-﻿namespace Proyecto.Interfaces
+﻿namespace Proyecto.Forms
 {
-    partial class Tareas
+    partial class btnAgregar
     {
         /// <summary>
         /// Required designer variable.
@@ -34,29 +34,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.Labeln = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Estimaciontxt = new System.Windows.Forms.NumericUpDown();
+            this.Fecha_Vencimiento = new System.Windows.Forms.DateTimePicker();
+            this.Fecha_Iniciotxt = new System.Windows.Forms.DateTimePicker();
+            this.Prioridadtxt = new System.Windows.Forms.ComboBox();
+            this.Proyectotxt = new System.Windows.Forms.ComboBox();
+            this.Responsabletxt = new System.Windows.Forms.ComboBox();
+            this.Titulotxt = new System.Windows.Forms.TextBox();
+            this.Descripciontxt = new System.Windows.Forms.RichTextBox();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnRegresar = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Estimaciontxt)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -120,15 +117,15 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Prioridad:";
             // 
-            // label6
+            // Labeln
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 222);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(184, 24);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Fecha de vencimiento:";
+            this.Labeln.AutoSize = true;
+            this.Labeln.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Labeln.Location = new System.Drawing.Point(12, 222);
+            this.Labeln.Name = "Labeln";
+            this.Labeln.Size = new System.Drawing.Size(184, 24);
+            this.Labeln.TabIndex = 12;
+            this.Labeln.Text = "Fecha de vencimiento:";
             // 
             // label7
             // 
@@ -163,15 +160,15 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
-            this.groupBox2.Controls.Add(this.dateTimePicker2);
-            this.groupBox2.Controls.Add(this.comboBox3);
-            this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.richTextBox1);
-            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.Estimaciontxt);
+            this.groupBox2.Controls.Add(this.Fecha_Vencimiento);
+            this.groupBox2.Controls.Add(this.Fecha_Iniciotxt);
+            this.groupBox2.Controls.Add(this.Prioridadtxt);
+            this.groupBox2.Controls.Add(this.Proyectotxt);
+            this.groupBox2.Controls.Add(this.Responsabletxt);
+            this.groupBox2.Controls.Add(this.Titulotxt);
+            this.groupBox2.Controls.Add(this.Descripciontxt);
+            this.groupBox2.Controls.Add(this.Labeln);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
@@ -184,151 +181,127 @@
             this.groupBox2.Size = new System.Drawing.Size(477, 464);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // numericUpDown1
+            // Estimaciontxt
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(119, 258);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 32;
+            this.Estimaciontxt.Location = new System.Drawing.Point(119, 258);
+            this.Estimaciontxt.Name = "Estimaciontxt";
+            this.Estimaciontxt.Size = new System.Drawing.Size(120, 22);
+            this.Estimaciontxt.TabIndex = 32;
             // 
-            // dateTimePicker1
+            // Fecha_Vencimiento
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(202, 224);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(269, 22);
-            this.dateTimePicker1.TabIndex = 31;
+            this.Fecha_Vencimiento.Location = new System.Drawing.Point(202, 224);
+            this.Fecha_Vencimiento.Name = "Fecha_Vencimiento";
+            this.Fecha_Vencimiento.Size = new System.Drawing.Size(269, 22);
+            this.Fecha_Vencimiento.TabIndex = 31;
             // 
-            // dateTimePicker2
+            // Fecha_Iniciotxt
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(134, 187);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(269, 22);
-            this.dateTimePicker2.TabIndex = 30;
+            this.Fecha_Iniciotxt.Location = new System.Drawing.Point(134, 187);
+            this.Fecha_Iniciotxt.Name = "Fecha_Iniciotxt";
+            this.Fecha_Iniciotxt.Size = new System.Drawing.Size(269, 22);
+            this.Fecha_Iniciotxt.TabIndex = 30;
             // 
-            // comboBox3
+            // Prioridadtxt
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(104, 126);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(92, 24);
-            this.comboBox3.TabIndex = 28;
+            this.Prioridadtxt.FormattingEnabled = true;
+            this.Prioridadtxt.Location = new System.Drawing.Point(104, 126);
+            this.Prioridadtxt.Name = "Prioridadtxt";
+            this.Prioridadtxt.Size = new System.Drawing.Size(92, 24);
+            this.Prioridadtxt.TabIndex = 28;
             // 
-            // comboBox2
+            // Proyectotxt
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(105, 86);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(236, 24);
-            this.comboBox2.TabIndex = 27;
+            this.Proyectotxt.FormattingEnabled = true;
+            this.Proyectotxt.Location = new System.Drawing.Point(105, 86);
+            this.Proyectotxt.Name = "Proyectotxt";
+            this.Proyectotxt.Size = new System.Drawing.Size(236, 24);
+            this.Proyectotxt.TabIndex = 27;
             // 
-            // comboBox1
+            // Responsabletxt
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(134, 49);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(207, 24);
-            this.comboBox1.TabIndex = 26;
+            this.Responsabletxt.FormattingEnabled = true;
+            this.Responsabletxt.Location = new System.Drawing.Point(134, 49);
+            this.Responsabletxt.Name = "Responsabletxt";
+            this.Responsabletxt.Size = new System.Drawing.Size(207, 24);
+            this.Responsabletxt.TabIndex = 26;
             // 
-            // textBox4
+            // Titulotxt
             // 
-            this.textBox4.Location = new System.Drawing.Point(77, 21);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(178, 22);
-            this.textBox4.TabIndex = 24;
+            this.Titulotxt.Location = new System.Drawing.Point(77, 21);
+            this.Titulotxt.Name = "Titulotxt";
+            this.Titulotxt.Size = new System.Drawing.Size(178, 22);
+            this.Titulotxt.TabIndex = 24;
             // 
-            // richTextBox1
+            // Descripciontxt
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 325);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(443, 123);
-            this.richTextBox1.TabIndex = 25;
-            this.richTextBox1.Text = "";
+            this.Descripciontxt.Location = new System.Drawing.Point(16, 325);
+            this.Descripciontxt.Name = "Descripciontxt";
+            this.Descripciontxt.Size = new System.Drawing.Size(443, 123);
+            this.Descripciontxt.TabIndex = 25;
+            this.Descripciontxt.Text = "";
             // 
-            // textBox1
+            // btnEditar
             // 
-            this.textBox1.Location = new System.Drawing.Point(516, 238);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 18;
+            this.btnEditar.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEditar.Location = new System.Drawing.Point(667, 271);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(93, 38);
+            this.btnEditar.TabIndex = 22;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // btnEliminar
             // 
-            this.textBox2.Location = new System.Drawing.Point(811, 238);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 19;
+            this.btnEliminar.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEliminar.Location = new System.Drawing.Point(820, 275);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(89, 34);
+            this.btnEliminar.TabIndex = 23;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = false;
             // 
-            // textBox3
+            // btnRegresar
             // 
-            this.textBox3.Location = new System.Drawing.Point(652, 238);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 20;
+            this.btnRegresar.AutoSize = true;
+            this.btnRegresar.Font = new System.Drawing.Font("Arial Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegresar.Location = new System.Drawing.Point(805, 484);
+            this.btnRegresar.Name = "btnRegresar";
+            this.btnRegresar.Size = new System.Drawing.Size(157, 40);
+            this.btnRegresar.TabIndex = 33;
+            this.btnRegresar.Text = "Regresar";
+            this.btnRegresar.Click += new System.EventHandler(this.btnRegresar_Click_1);
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Location = new System.Drawing.Point(527, 286);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAdd.Location = new System.Drawing.Point(543, 275);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(93, 38);
+            this.btnAdd.TabIndex = 21;
+            this.btnAdd.Text = "Agregar";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button2.Location = new System.Drawing.Point(667, 286);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Editar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button3.Location = new System.Drawing.Point(820, 286);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(804, 501);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(157, 40);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Regresar";
-            this.label9.DoubleClick += new System.EventHandler(this.label9_DoubleClick);
-            // 
-            // Tareas
+            // btnAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 550);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnRegresar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Tareas";
+            this.Name = "btnAgregar";
             this.Text = "Tareas";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Estimaciontxt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,25 +315,22 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Labeln;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.RichTextBox Descripciontxt;
+        private System.Windows.Forms.TextBox Titulotxt;
+        private System.Windows.Forms.ComboBox Prioridadtxt;
+        private System.Windows.Forms.ComboBox Proyectotxt;
+        private System.Windows.Forms.ComboBox Responsabletxt;
+        private System.Windows.Forms.NumericUpDown Estimaciontxt;
+        private System.Windows.Forms.DateTimePicker Fecha_Vencimiento;
+        private System.Windows.Forms.DateTimePicker Fecha_Iniciotxt;
+        private System.Windows.Forms.Label btnRegresar;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

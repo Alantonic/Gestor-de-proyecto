@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Proyecto.Modelos
 {
-    internal class Equipo
+    public class EquipoModel
     {
+        public int ID_equipo { get; set; }
+        public string Nombre { get; set; }
+        public string descripciòn { get; set; } 
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Proyecto
+﻿namespace Proyecto.Interfaces
 {
-    partial class Login
+    partial class Iniciar_sesion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,111 +28,95 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TU2 = new System.Windows.Forms.TextBox();
+            this.TC2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TU1 = new System.Windows.Forms.TextBox();
-            this.TC1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(0, -17);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(805, 91);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(267, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 40);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Gestor de proyectos";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(242, 161);
+            this.label2.Location = new System.Drawing.Point(261, 208);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 27);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Usuario:";
+            this.label2.Size = new System.Drawing.Size(121, 27);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Contraseña:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(261, 151);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 27);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Usuario:";
+            // 
+            // TU2
+            // 
+            this.TU2.Location = new System.Drawing.Point(388, 151);
+            this.TU2.Name = "TU2";
+            this.TU2.Size = new System.Drawing.Size(100, 22);
+            this.TU2.TabIndex = 4;
+            // 
+            // TC2
+            // 
+            this.TC2.Location = new System.Drawing.Point(388, 213);
+            this.TC2.Name = "TC2";
+            this.TC2.Size = new System.Drawing.Size(100, 22);
+            this.TC2.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(242, 236);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(260, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 27);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Contraseña:";
-            // 
-            // TU1
-            // 
-            this.TU1.Location = new System.Drawing.Point(363, 166);
-            this.TU1.Name = "TU1";
-            this.TU1.Size = new System.Drawing.Size(100, 22);
-            this.TU1.TabIndex = 3;
-            // 
-            // TC1
-            // 
-            this.TC1.Location = new System.Drawing.Point(363, 241);
-            this.TC1.Multiline = true;
-            this.TC1.Name = "TC1";
-            this.TC1.Size = new System.Drawing.Size(100, 22);
-            this.TC1.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(353, 373);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 54);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Acceder";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label3.Size = new System.Drawing.Size(272, 32);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Gestor de proyecto";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(358, 330);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(318, 409);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(131, 27);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Iniciar sesión";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.label4.Size = new System.Drawing.Size(170, 32);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Registrarse";
             // 
-            // Login
+            // btnIniciarSesion
+            // 
+            this.btnIniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarSesion.Location = new System.Drawing.Point(337, 348);
+            this.btnIniciarSesion.Name = "btnIniciarSesion";
+            this.btnIniciarSesion.Size = new System.Drawing.Size(124, 37);
+            this.btnIniciarSesion.TabIndex = 8;
+            this.btnIniciarSesion.Text = "Acceder";
+            this.btnIniciarSesion.UseVisualStyleBackColor = true;
+            this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
+            // 
+            // Iniciar_sesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnIniciarSesion);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.TC1);
-            this.Controls.Add(this.TU1);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.TC2);
+            this.Controls.Add(this.TU2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "Login";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Login_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Name = "Iniciar_sesion";
+            this.Text = "Iniciar_sesion";
+            this.Load += new System.EventHandler(this.Iniciar_sesion_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,13 +124,12 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TU1;
-        private System.Windows.Forms.TextBox TC1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TU2;
+        private System.Windows.Forms.TextBox TC2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnIniciarSesion;
     }
 }

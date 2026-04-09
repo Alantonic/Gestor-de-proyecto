@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtGmail = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.IDcomboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -50,16 +50,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre:";
             // 
-            // txtGmail
-            // 
-            this.txtGmail.AutoSize = true;
-            this.txtGmail.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGmail.Location = new System.Drawing.Point(102, 145);
-            this.txtGmail.Name = "txtGmail";
-            this.txtGmail.Size = new System.Drawing.Size(59, 24);
-            this.txtGmail.TabIndex = 1;
-            this.txtGmail.Text = "Gmail:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -69,19 +59,18 @@
             this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "Telefono:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(0, 211);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(400, 39);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnGuardar.BackColor = System.Drawing.Color.Lime;
+            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.Location = new System.Drawing.Point(-1, 269);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(400, 39);
+            this.btnGuardar.TabIndex = 3;
+            this.btnGuardar.Text = "Agregar";
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtNombre
             // 
@@ -97,20 +86,20 @@
             this.txtTelefono.Size = new System.Drawing.Size(100, 22);
             this.txtTelefono.TabIndex = 5;
             // 
-            // textBox3
+            // txtCorreo
             // 
-            this.textBox3.Location = new System.Drawing.Point(189, 148);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 6;
+            this.txtCorreo.Location = new System.Drawing.Point(189, 148);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(100, 22);
+            this.txtCorreo.TabIndex = 6;
             // 
-            // comboBox1
+            // IDcomboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(189, 181);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 24);
-            this.comboBox1.TabIndex = 9;
+            this.IDcomboBox.FormattingEnabled = true;
+            this.IDcomboBox.Location = new System.Drawing.Point(189, 181);
+            this.IDcomboBox.Name = "IDcomboBox";
+            this.IDcomboBox.Size = new System.Drawing.Size(100, 24);
+            this.IDcomboBox.TabIndex = 9;
             // 
             // label5
             // 
@@ -132,22 +121,32 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Editar usuario";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(102, 148);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 24);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Gmail:";
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.IDcomboBox);
+            this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtGmail);
             this.Controls.Add(this.label1);
             this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(400, 250);
+            this.Size = new System.Drawing.Size(399, 363);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,14 +156,15 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label txtGmail;
+        //private System.Windows.Forms.Label txtGmail;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.ComboBox IDcomboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }

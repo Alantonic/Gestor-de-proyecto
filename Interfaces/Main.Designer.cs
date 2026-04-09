@@ -40,7 +40,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,6 +93,7 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Clientes";
             this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label3.DoubleClick += new System.EventHandler(this.label3_DoubleClick);
             // 
             // label4
             // 
@@ -116,6 +116,7 @@
             this.label5.Size = new System.Drawing.Size(128, 27);
             this.label5.TabIndex = 5;
             this.label5.Text = "Documentos";
+            this.label5.DoubleClick += new System.EventHandler(this.label5_DoubleClick);
             // 
             // label6
             // 
@@ -153,6 +154,8 @@
             this.label7.Size = new System.Drawing.Size(131, 27);
             this.label7.TabIndex = 7;
             this.label7.Text = "Cerrar sesión";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            this.label7.DoubleClick += new System.EventHandler(this.label7_DoubleClick);
             // 
             // label8
             // 
@@ -162,16 +165,6 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(0, 33);
             this.label8.TabIndex = 2;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(424, 119);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(195, 25);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Tareas disponibles";
             // 
             // label10
             // 
@@ -188,7 +181,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -216,7 +208,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
     }
 }

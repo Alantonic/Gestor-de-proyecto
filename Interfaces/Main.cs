@@ -33,6 +33,7 @@ namespace Proyecto.Forms
         {
             Usuarioview form = new Usuarioview();
             form.ShowDialog();
+            Close();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -59,6 +60,7 @@ namespace Proyecto.Forms
         {
             Usuarioview form = new Usuarioview();
             form.ShowDialog();
+            Close();
         }
 
       
@@ -71,7 +73,7 @@ namespace Proyecto.Forms
 
         private void label4_DoubleClick(object sender, EventArgs e)
         {
-            Tareas form = new Tareas();
+            TareasView form = new TareasView();
             form.ShowDialog();
         }
 
@@ -83,6 +85,31 @@ namespace Proyecto.Forms
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label7_DoubleClick(object sender, EventArgs e)
+        {
+            Login form = new Login();
+            form.ShowDialog();
+            Close();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_DoubleClick(object sender, EventArgs e)
+        {
+            Documentosview form = new Documentosview();
+            form.ShowDialog();
+        }
+
+        private void label3_DoubleClick(object sender, EventArgs e)
+        {
+            ClientesView form = new ClientesView();
+            form.ShowDialog();
+            Close();
         }
     }
     }

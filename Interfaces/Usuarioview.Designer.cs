@@ -43,7 +43,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(800, 358);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+           // this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
@@ -76,7 +76,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Usuarioview";
             this.Text = "Usuario";
-         //   this.Load += new System.EventHandler(this.Usuario_Load);
+            this.Load += new System.EventHandler(this.Usuarioview_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
