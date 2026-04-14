@@ -3,15 +3,12 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using Proyecto.Conexion_Base_Datos;
 using Proyecto.Modelos;
-using Proyecto.Repositorio;
 
 namespace Proyecto.Controles
 {
     public partial class ClientesControl3 : UserControl
     {
         public bool Datos_guardados { get; private set; }
-        private ClientesModel _clienteEditando;
-        private bool _esEdicion = false;
 
         // Constructor para NUEVO cliente
         public ClientesControl3()
@@ -21,50 +18,39 @@ namespace Proyecto.Controles
             this.AutoSizeMode = AutoSizeMode.GrowOnly;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
-            Datos_guardados = false;
-            _esEdicion = false;
-            _clienteEditando = null;
-            ConfigurarParaNuevo();
+
+            // Generar el siguiente ID disponible automáticamente
+            txtIdCliente.Text = ObtenerSiguienteId().ToString();
+            txtIdCliente.ReadOnly = true; // El ID no se edita
         }
 
         // Constructor para EDITAR cliente
         public ClientesControl3(ClientesModel cliente)
         {
             InitializeComponent();
-            this.AutoSize = false;
-            this.AutoSizeMode = AutoSizeMode.GrowOnly;
-            this.MinimumSize = this.Size;
-            this.MaximumSize = this.Size;
             Datos_guardados = false;
-            _esEdicion = true;
-            _clienteEditando = cliente;
             CargarDatos(cliente);
-            ConfigurarParaEdicion();
+            txtIdCliente.ReadOnly = true; // El ID no se edita
         }
 
-        private void ConfigurarParaNuevo()
+        // Método para obtener el siguiente ID disponible
+        private int ObtenerSiguienteId()
         {
-            Btnguardar.Text = "Guardar Cliente";
-            LimpiarCampos();
-            // Generar nuevo ID automáticamente
-            var repo = new ClientesRepository();
-            int nuevoId = repo.GetLastId() + 1;
-            txtIdCliente.Text = nuevoId.ToString();
-            txtIdCliente.ReadOnly = true; // El ID no se puede editar
-        }
-
-        private void ConfigurarParaEdicion()
-        {
-            Btnguardar.Text = "Actualizar Cliente";
-            txtIdCliente.ReadOnly = true; // El ID no se puede editar
-        }
-
-        private void LimpiarCampos()
-        {
-            txtNombre.Clear();
-            txtApellido.Clear();
-            txtTelefono.Clear();
-            txtGmail1.Clear();
+            int siguienteId = 1;
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "SELECT ISNULL(MAX(Id_Cliente), 0) + 1 FROM Clientes";
+                    SqlCommand command = new SqlCommand(consulta, conexion);
+                    siguienteId = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar ID: " + ex.Message);
+            }
+            return siguienteId;
         }
 
         private void CargarDatos(ClientesModel cliente)
@@ -75,7 +61,7 @@ namespace Proyecto.Controles
                 txtNombre.Text = cliente.Nombre;
                 txtApellido.Text = cliente.Apellido;
                 txtTelefono.Text = cliente.Telefono;
-                txtGmail1.Text = cliente.Gmail;
+                txtGmail.Text = cliente.Gmail;
             }
         }
 
@@ -95,20 +81,6 @@ namespace Proyecto.Controles
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtGmail.Text))
-            {
-                MessageBox.Show("El email del cliente es obligatorio");
-                txtGmail.Focus();
-                return false;
-            }
-
-            if (!txtGmail.Text.Contains("@"))
-            {
-                MessageBox.Show("Ingrese un email válido");
-                txtGmail.Focus();
-                return false;
-            }
-
             return true;
         }
 
@@ -120,9 +92,10 @@ namespace Proyecto.Controles
             {
                 using (SqlConnection conexion = BD.ObtenerConexion())
                 {
-                    if (_esEdicion)
+                    // Verificar si es edición o nuevo
+                    if (txtIdCliente.ReadOnly && !string.IsNullOrWhiteSpace(txtIdCliente.Text) && EsClienteExistente(Convert.ToInt32(txtIdCliente.Text)))
                     {
-                        // UPDATE
+                        // UPDATE - Editar cliente existente
                         string consulta = @"UPDATE Clientes 
                                             SET Nombre = @Nombre,
                                                 Apellido = @Apellido,
@@ -135,7 +108,7 @@ namespace Proyecto.Controles
                         command.Parameters.AddWithValue("@Nombre", txtNombre.Text);
                         command.Parameters.AddWithValue("@Apellido", txtApellido.Text);
                         command.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-                        command.Parameters.AddWithValue("@Gmail", txtGmail1.Text);
+                        command.Parameters.AddWithValue("@Gmail", txtGmail.Text);
 
                         int ejecutar = command.ExecuteNonQuery();
 
@@ -152,16 +125,18 @@ namespace Proyecto.Controles
                     }
                     else
                     {
-                        // INSERT
-                        string consulta = @"INSERT INTO Clientes (Id_Cliente, Nombre, Apellido, Telefono, Gmail) 
-                                            VALUES (@Id_Cliente, @Nombre, @Apellido, @Telefono, @Gmail)";
+                        // INSERT - Nuevo cliente (usar el ID generado)
+                        string consulta = @"INSERT INTO Clientes 
+                                            (Id_Cliente, Nombre, Apellido, Telefono, Gmail) 
+                                            VALUES 
+                                            (@Id_Cliente, @Nombre, @Apellido, @Telefono, @Gmail)";
 
                         SqlCommand command = new SqlCommand(consulta, conexion);
                         command.Parameters.AddWithValue("@Id_Cliente", Convert.ToInt32(txtIdCliente.Text));
                         command.Parameters.AddWithValue("@Nombre", txtNombre.Text);
                         command.Parameters.AddWithValue("@Apellido", txtApellido.Text);
                         command.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-                        command.Parameters.AddWithValue("@Gmail", txtGmail1.Text);
+                        command.Parameters.AddWithValue("@Gmail", txtGmail.Text);
 
                         int ejecutar = command.ExecuteNonQuery();
 
@@ -184,9 +159,30 @@ namespace Proyecto.Controles
             }
         }
 
+        // Método para verificar si un cliente ya existe
+        private bool EsClienteExistente(int id)
+        {
+            try
+            {
+                using (SqlConnection conexion = BD.ObtenerConexion())
+                {
+                    string consulta = "SELECT COUNT(*) FROM Clientes WHERE Id_Cliente = @Id";
+                    SqlCommand command = new SqlCommand(consulta, conexion);
+                    command.Parameters.AddWithValue("@Id", id);
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void ClientesControl3_Load(object sender, EventArgs e)
         {
-
         }
+
+        
     }
 }

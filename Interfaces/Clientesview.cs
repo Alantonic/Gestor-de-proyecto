@@ -10,66 +10,10 @@ namespace Proyecto.Interfaces
         public ClientesView()
         {
             InitializeComponent();
-            Cliente_Settings();
             IniatializateClientesDataGridView();
             InitializeContextMenu();
         }
 
-        // Configurar columnas del DataGridView
-        private void Cliente_Settings()
-        {
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.Columns.Clear();
-
-            // Columna ID Cliente
-            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
-            colId.Name = "Id_Cliente";
-            colId.DataPropertyName = "Id_Cliente";
-            colId.HeaderText = "ID Cliente";
-            colId.Width = 80;
-            colId.ReadOnly = true;
-            dataGridView1.Columns.Add(colId);
-
-            // Columna Nombre
-            DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
-            colNombre.Name = "Nombre";
-            colNombre.DataPropertyName = "Nombre";
-            colNombre.HeaderText = "Nombre";
-            colNombre.Width = 120;
-            dataGridView1.Columns.Add(colNombre);
-
-            // Columna Apellido
-            DataGridViewTextBoxColumn colApellido = new DataGridViewTextBoxColumn();
-            colApellido.Name = "Apellido";
-            colApellido.DataPropertyName = "Apellido";
-            colApellido.HeaderText = "Apellido";
-            colApellido.Width = 120;
-            dataGridView1.Columns.Add(colApellido);
-
-            // Columna Teléfono
-            DataGridViewTextBoxColumn colTelefono = new DataGridViewTextBoxColumn();
-            colTelefono.Name = "Telefono";
-            colTelefono.DataPropertyName = "Telefono";
-            colTelefono.HeaderText = "Teléfono";
-            colTelefono.Width = 100;
-            dataGridView1.Columns.Add(colTelefono);
-
-            // Columna Gmail
-            DataGridViewTextBoxColumn colGmail = new DataGridViewTextBoxColumn();
-            colGmail.Name = "Gmail";
-            colGmail.DataPropertyName = "Gmail";
-            colGmail.HeaderText = "Gmail";
-            colGmail.Width = 150;
-            dataGridView1.Columns.Add(colGmail);
-
-            // Configuración adicional
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
-            dataGridView1.AllowUserToAddRows = false;
-        }
-
-        // Inicializar DataGridView con datos
         private void IniatializateClientesDataGridView()
         {
             try
@@ -83,7 +27,6 @@ namespace Proyecto.Interfaces
             }
         }
 
-        // Configurar menú contextual
         private void InitializeContextMenu()
         {
             ContextMenuStrip contextMenu = new ContextMenuStrip();
@@ -98,20 +41,16 @@ namespace Proyecto.Interfaces
 
             dataGridView1.ContextMenuStrip = contextMenu;
         }
-        
-        // Editar cliente
+
         private void EditClienteButton_Click(object sender, EventArgs e)
         {
             // Verifica que haya una celda seleccionada
-            if (dataGridView1.SelectedCells.Count == 0) return;
-
             var selectedCell = dataGridView1.SelectedCells[0];
             if (selectedCell == null) return;
 
             var selectedRow = dataGridView1.Rows[selectedCell.RowIndex];
             if (selectedRow == null) return;
 
-            // Obtiene el ID del cliente usando el nombre de la columna
             int id_cliente = Convert.ToInt32(selectedRow.Cells["Id_Cliente"].Value);
 
             var repo = new ClientesRepository();
@@ -119,7 +58,7 @@ namespace Proyecto.Interfaces
 
             if (selectedCliente == null) return;
 
-            // Abre el formulario de edición
+            // Abre el ClientesControl3 (como UserControl2)
             Form form = new Form();
             form.Text = "Editar Cliente";
             form.AutoSize = true;
@@ -127,6 +66,9 @@ namespace Proyecto.Interfaces
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
 
             ClientesControl3 controlCliente = new ClientesControl3(selectedCliente);
+            form.ClientSize = controlCliente.Size;     
+            form.MinimumSize = controlCliente.Size;     
+            form.MaximumSize = controlCliente.Size;    
             controlCliente.Dock = DockStyle.Fill;
             form.Controls.Add(controlCliente);
             form.ShowDialog();
@@ -134,18 +76,19 @@ namespace Proyecto.Interfaces
             IniatializateClientesDataGridView(); // Actualiza la vista después de editar
         }
 
-        // Eliminar cliente
+        // ELIMINAR Cliente
         private void DeleteClienteButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedCells.Count == 0) return;
-
             var selectedCell = dataGridView1.SelectedCells[0];
             if (selectedCell == null) return;
 
             var selectedRow = dataGridView1.Rows[selectedCell.RowIndex];
             if (selectedRow == null) return;
 
-            int id_cliente = Convert.ToInt32(selectedRow.Cells["Id_Cliente"].Value);
+            var repo = new ClientesRepository();
+            var selectedCliente = repo.Find(Convert.ToInt32(selectedRow.Cells["Id_Cliente"].Value));
+
+            if (selectedCliente == null) return;
 
             DialogResult result = MessageBox.Show(
                 "¿Estás seguro de que deseas eliminar este cliente?",
@@ -156,10 +99,8 @@ namespace Proyecto.Interfaces
 
             if (result == DialogResult.Yes)
             {
-                var repo = new ClientesRepository();
-                bool eliminado = repo.Delete(id_cliente);
-
-                if (eliminado)
+                bool isDeleted = new ClientesRepository().Delete(selectedCliente.Id_Cliente);
+                if (isDeleted)
                 {
                     MessageBox.Show("Cliente eliminado exitosamente", "Hecho", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     IniatializateClientesDataGridView();
@@ -171,34 +112,8 @@ namespace Proyecto.Interfaces
             }
         }
 
-        // Botón para NUEVO cliente (opcional - agrégalo en el diseñador)
-        private void btnNuevoCliente_Click(object sender, EventArgs e)
-        {
-            Form form = new Form();
-            form.Text = "Nuevo Cliente";
-            form.FormBorderStyle = FormBorderStyle.FixedDialog;  // Borde fijo
-            form.StartPosition = FormStartPosition.CenterParent; // Centrar
-            form.MaximizeBox = false;  // Deshabilitar maximizar
-            form.MinimizeBox = false;  // Deshabilitar minimizar
-            form.ControlBox = true;     // Mantener botón cerrar
-            form.AutoSize = false;      // No autoajustar
-
-            form.AutoSize = true;
-            form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            form.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            ClientesControl3 controlCliente = new ClientesControl3();
-            controlCliente.Dock = DockStyle.Fill;
-            form.Controls.Add(controlCliente);
-            form.ShowDialog();
-            Close();
-
-            IniatializateClientesDataGridView();
-        }
-
         private void ClientesView_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

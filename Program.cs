@@ -17,7 +17,7 @@ namespace Proyecto
         
 
             // 3. Abre el formulario principal
-            Application.Run(new Login());
+            Application.Run(new RegistroForm());
         }
     }
 }

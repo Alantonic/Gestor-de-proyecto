@@ -89,7 +89,7 @@ namespace Proyecto.Forms
 
         private void label7_DoubleClick(object sender, EventArgs e)
         {
-            Login form = new Login();
+            LoginForm form = new LoginForm();
             form.ShowDialog();
             Close();
         }

@@ -1,6 +1,6 @@
-﻿namespace Proyecto.Interfaces
+﻿namespace Proyecto.Forms
 {
-    partial class Iniciar_sesion
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,8 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TU2 = new System.Windows.Forms.TextBox();
-            this.TC2 = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnIniciarSesion = new System.Windows.Forms.Button();
@@ -57,19 +57,19 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Usuario:";
             // 
-            // TU2
+            // txtUsuario
             // 
-            this.TU2.Location = new System.Drawing.Point(388, 151);
-            this.TU2.Name = "TU2";
-            this.TU2.Size = new System.Drawing.Size(100, 22);
-            this.TU2.TabIndex = 4;
+            this.txtUsuario.Location = new System.Drawing.Point(388, 151);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(100, 22);
+            this.txtUsuario.TabIndex = 4;
             // 
-            // TC2
+            // txtPassword
             // 
-            this.TC2.Location = new System.Drawing.Point(388, 213);
-            this.TC2.Name = "TC2";
-            this.TC2.Size = new System.Drawing.Size(100, 22);
-            this.TC2.TabIndex = 5;
+            this.txtPassword.Location = new System.Drawing.Point(388, 213);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(100, 22);
+            this.txtPassword.TabIndex = 5;
             // 
             // label3
             // 
@@ -102,7 +102,7 @@
             this.btnIniciarSesion.UseVisualStyleBackColor = true;
             this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
             // 
-            // Iniciar_sesion
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,13 +110,12 @@
             this.Controls.Add(this.btnIniciarSesion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.TC2);
-            this.Controls.Add(this.TU2);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Name = "Iniciar_sesion";
+            this.Name = "LoginForm";
             this.Text = "Iniciar_sesion";
-            this.Load += new System.EventHandler(this.Iniciar_sesion_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,8 +125,8 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TU2;
-        private System.Windows.Forms.TextBox TC2;
+        private System.Windows.Forms.TextBox txtUsuario;
+        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnIniciarSesion;

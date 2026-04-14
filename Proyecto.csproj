@@ -136,9 +136,11 @@
     <Compile Include="Modelos\ClientesModel.cs" />
     <Compile Include="Modelos\DocumentoModel.cs" />
     <Compile Include="Modelos\EquipoModel.cs" />
+    <Compile Include="Modelos\LoginModel.cs" />
     <Compile Include="Modelos\ProyectosModel.cs" />
     <Compile Include="Modelos\TareasModel.cs" />
     <Compile Include="Modelos\UsuariosModel.cs" />
+    <Compile Include="Repositorio\AuthRepository.cs" />
     <Compile Include="Repositorio\ClientesRepository.cs" />
     <Compile Include="Repositorio\DocumentoRepository.cs" />
     <Compile Include="Repositorio\EquipoRepository.cs" />

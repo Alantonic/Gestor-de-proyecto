@@ -83,6 +83,7 @@
             this.Btnguardar.TabIndex = 31;
             this.Btnguardar.Text = "Actualizar documento";
             this.Btnguardar.UseVisualStyleBackColor = false;
+            this.Btnguardar.Click += new System.EventHandler(this.Btnguardar_Click_1);
             // 
             // txtGmail
             // 

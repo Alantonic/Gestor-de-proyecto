@@ -118,7 +118,7 @@ namespace Proyecto.Controles
             return true;
         }
 
-        private void Btnguardar_Click(object sender, EventArgs e)
+        private void Btnguardar_Click_1(object sender, EventArgs e)
         {
             // Validar campos obligatorios
             if (!ValidarCampos()) return;
@@ -199,5 +199,7 @@ namespace Proyecto.Controles
         {
 
         }
+
+        
     }
 }
