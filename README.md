@@ -35,3 +35,7 @@ Esta estructura permite un código más organizado, mantenible y escalable.
 2- Puedes registrarse libremente dejando libre las cajas de texto e ir directo al sistema.
 3- Elegir una sección con doble click.
 4- Dar click derecho en tablas con información para ver opciones como editar o eliminar.
+
+#Paquetes instalados en administrador de paquetes NuGet
+- EntityFramework
+- System.Configuration.ConfigurationManager
