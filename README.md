@@ -31,7 +31,12 @@ El proyecto está desarrollado utilizando arquitectura en capas, separando respo
 Esta estructura permite un código más organizado, mantenible y escalable.
 
 # instrucciones
-1- Para abrir este archivo se integro dentro de la carpeta principal el archivo .Sln donde pueden interactuar con todo el proyecto.
-2- Puedes registrarse libremente dejando libre las cajas de texto e ir directo al sistema.
-3- Elegir una sección con doble click.
-4- Dar click derecho en tablas con información para ver opciones como editar o eliminar.
+- Para abrir este archivo se integro dentro de la carpeta principal el archivo .Sln donde pueden interactuar con todo el proyecto.
+- En el app.config está la cadena de conexión de la base de datos para cambiarlo
+- Es necesario cumplir con rellenar los campo de registro.
+- Elegir una sección con doble click.
+- Dar click derecho en tablas con información para ver opciones como editar o eliminar.
+
+#Paquetes instalados en administrador de paquetes NuGet
+- EntityFramework
+- System.Configuration.ConfigurationManager
