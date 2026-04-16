@@ -33,7 +33,7 @@ Esta estructura permite un código más organizado, mantenible y escalable.
 # instrucciones
 1- Para abrir este archivo se integro dentro de la carpeta principal el archivo .Sln donde pueden interactuar con todo el proyecto.
 2- En el app.config está la cadena de conexión de la base de datos para cambiarlo
-3- Puedes registrarse libremente dejando libre las cajas de texto e ir directo al sistema en el area de registro.
+3- Es necesario cumplir con rellenar los campo de registro.
 4- Elegir una sección con doble click.
 5- Dar click derecho en tablas con información para ver opciones como editar o eliminar.
 
