@@ -33,7 +33,8 @@ namespace Proyecto.Forms
             if (repo.RegistrarUsuario(usuario, password))
             {
                 MessageBox.Show("Usuario registrado exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                Main main = new Main();
+                main.Show();
             }
             else
             {
@@ -46,7 +47,11 @@ namespace Proyecto.Forms
 
         }
 
-        
+        private void label4_Click(object sender, EventArgs e)
+        {
+            LoginForm form = new LoginForm();
+            form.ShowDialog();
+        }
     }
 }
 
